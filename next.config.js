@@ -1,7 +1,9 @@
 /** @type {import('next').NextConfig} */
 module.exports = {
+  output: 'export',
   reactStrictMode: true,
   images: {
+    unoptimized: true, // Disables image optimization
     remotePatterns: [
       {
         protocol: 'https',
@@ -26,6 +28,11 @@ module.exports = {
       {
         protocol: 'https',
         hostname: 'buttons-animations-kv.vercel.app',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'via.placeholder.com',
         pathname: '/**',
       },
     ],

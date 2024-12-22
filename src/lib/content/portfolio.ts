@@ -7,33 +7,32 @@
 import { StringKeyValueType } from '../types';
 
 export const socialLinks: StringKeyValueType = {
-  facebook: 'https://www.facebook.com/vatsalsinghkv',
-  instagram: 'https://www.instagram.com/vatsalsinghkv',
-  twitter: 'https://twitter.com/vatsalsinghkv',
-  github: 'https://github.com/vatsalsinghkv',
-  linkedin: 'https://www.linkedin.com/in/vatsalsinghkv/',
+  facebook: 'https://www.facebook.com',
+  instagram: 'https://www.instagram.com',
+  twitter: 'https://twitter.com',
+  github: 'https://github.com/umarkhalidk',
+  linkedin: 'https://www.linkedin.com/in/',
 };
 
 export const author = {
-  name: 'Umer Khalid',
+  name: 'Umer Warraich',
   email: 'umer.mern.dev@gmail.com',
 };
 
 export const seoData = {
-  title: 'Umer Khalid | Front-End Developer',
+  title: 'Umer Warraich | Front-End Developer',
   description:
-    'Umer khalid is a front-end developer who specializes in building (and occasionally designing) exceptional visual interfaces.',
+    'Umer Warraich is a front-end developer who specializes in building (and occasionally designing) exceptional visual interfaces.',
   author: author.name,
   image:
-    'https://user-images.githubusercontent.com/68834718/217467445-0b0d2d63-f8ad-4702-8474-814eb2cbb3be.png',
-  url: 'https://vatsalsinghkv.vercel.app/',
+    '/portfolio-site-image.png',
+  url: 'https://umerwarraich.com/',
   keywords: [
     'Umer',
-    'Umer Khalid',
-    '@vatsalsinghkv',
-    'vatsalsinghkv',
+    'Umer Warraich',
+ 
     'Portfolio',
     'Umer Portfolio ',
-    'Umer Khalid Portfolio',
+    'Umer Warraich Portfolio',
   ],
 };

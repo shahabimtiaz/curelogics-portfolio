@@ -1,5 +1,5 @@
 'use client';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { heroSection } from '@/lib/content/hero';
 import useWindowWidth from '@/lib/hooks/use-window-width';
 import { getBreakpointsWidth } from '@/lib/utils/helper';
@@ -18,19 +18,15 @@ const TypingTitle = ({ title }: { title: string }) => {
   useEffect(() => {
     const handleTyping = () => {
       if (!isDeleting) {
-        // Typing out
         if (displayedTitle.length < title.length) {
           setDisplayedTitle(title.slice(0, displayedTitle.length + 1));
         } else {
-          // Start deleting after a pause
           setTimeout(() => setIsDeleting(true), 2000);
         }
       } else {
-        // Deleting
         if (displayedTitle.length > 0) {
           setDisplayedTitle(title.slice(0, displayedTitle.length - 1));
         } else {
-          // Reset to start typing again
           setIsDeleting(false);
         }
       }
@@ -72,7 +68,6 @@ const TypingTitle = ({ title }: { title: string }) => {
 const Hero = () => {
   const { cta, subtitle, title, tagline, description, specialText } =
     heroSection;
-
   const windowWidth = useWindowWidth();
   const md = getBreakpointsWidth('md');
   const DEFAULT_ANIMATION_DELAY = windowWidth <= md ? 0.9 : 1.7;
@@ -137,7 +132,7 @@ const Hero = () => {
   return (
     <Wrapper
       id="hero"
-      className="relative flex flex-col justify-center min-h-screen  overflow-hidden mt-10"
+      className="relative flex flex-col justify-center min-h-screen overflow-hidden mt-10"
     >
       <div className="relative z-10 max-w-4xl">
         <motion.p
@@ -148,8 +143,7 @@ const Hero = () => {
           initial="hidden"
           animate="show"
           transition={{ delay: getAnimationDelay(0) }}
-          className="text-sm md:text-base text-accent font-mono mb-4 
-          flex items-center gap-2"
+          className="text-sm md:text-base text-accent font-mono mb-4 flex items-center gap-2"
         >
           <span className="w-6 h-0.5 bg-accent"></span>
           {subtitle}
@@ -176,14 +170,10 @@ const Hero = () => {
           initial="hidden"
           animate="show"
           transition={{ delay: getAnimationDelay(2), duration: 0.7 }}
-          className="text-3xl md:text-5xl font-bold text-gray-800 
-          dark:text-gray-200 mb-6 relative"
+          className="text-3xl md:text-5xl font-bold text-gray-800 dark:text-gray-200 mb-6 relative"
         >
           {tagline}
-          <div
-            className="absolute -bottom-2 left-0 w-1/2 h-1 
-            bg-gradient-to-r from-blue-500 to-purple-500"
-          ></div>
+          <div className="absolute -bottom-2 left-0 w-1/2 h-1 bg-gradient-to-r from-blue-500 to-purple-500"></div>
         </motion.h2>
 
         <motion.p
@@ -194,10 +184,7 @@ const Hero = () => {
           initial="hidden"
           animate="show"
           transition={{ delay: getAnimationDelay(3) }}
-          className="max-w-2xl text-base md:text-lg text-gray-600 
-          dark:text-gray-300 mb-6 relative pl-4 
-          before:absolute before:left-0 before:top-0 
-          before:bottom-0 before:w-1 before:bg-accent"
+          className="max-w-2xl text-base md:text-lg text-gray-600 dark:text-gray-300 mb-6 relative pl-4 before:absolute before:left-0 before:top-0 before:bottom-0 before:w-1 before:bg-accent"
         >
           {description}
         </motion.p>
@@ -210,8 +197,7 @@ const Hero = () => {
           initial="hidden"
           animate="show"
           transition={{ delay: getAnimationDelay(4) }}
-          className="font-mono text-sm text-accent mb-6 
-          flex items-center gap-2"
+          className="font-mono text-sm text-accent mb-6 flex items-center gap-2"
         >
           <span className="w-6 h-0.5 bg-accent"></span>
           {specialText}
@@ -228,25 +214,12 @@ const Hero = () => {
                 size="lg"
                 type="link"
                 href={cta?.url ?? '#'}
-                className="group flex items-center space-x-2 
-                bg-gradient-to-r from-blue-600 to-purple-600 
-                hover:from-blue-700 hover:to-purple-700 
-                text-white px-6 py-3 rounded-full 
-                transition-all duration-300 ease-in-out 
-                transform hover:scale-105 hover:shadow-xl
-                relative overflow-hidden"
+                className="group flex items-center space-x-2 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-6 py-3 rounded-full transition-all duration-300 ease-in-out transform hover:scale-105 hover:shadow-xl relative overflow-hidden"
                 sameTab={cta?.sameTab}
               >
                 <span className="relative z-10">{cta.title}</span>
-                <ArrowRight
-                  className="w-5 h-5 transition-transform duration-300 
-                  group-hover:translate-x-1 relative z-10"
-                />
-                <span
-                  className="absolute inset-0 bg-white/20 
-                  opacity-0 group-hover:opacity-100 
-                  transition-opacity duration-300"
-                ></span>
+                <ArrowRight className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1 relative z-10" />
+                <span className="absolute inset-0 bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
               </Button>
             </motion.div>
           )}
@@ -254,7 +227,16 @@ const Hero = () => {
           <TechStack />
         </div>
       </div>
-      <TechSlider />
+
+      {/* Animated TechSlider */}
+      <motion.div
+        className="mt-8"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: getAnimationDelay(6), duration: 1 }}
+      >
+        <TechSlider />
+      </motion.div>
     </Wrapper>
   );
 };

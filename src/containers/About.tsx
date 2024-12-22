@@ -32,7 +32,7 @@ const About = () => {
         <div className="space-y-6 lg:w-3/5 text-lg">
           <p>
             Hi, my name is{' '}
-            <span className="font-bold text-accent">Umer Khalid</span>, a
+            <span className="font-bold text-accent">Umer Warraich</span>, a
             graduate with a Master of Computer Science (MSCS) from{' '}
             <Link
               href="https://www.usc.edu/"

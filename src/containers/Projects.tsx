@@ -18,7 +18,7 @@ const Projects = () => {
   const visibleProjects = showMore ? projects : topProjects;
 
   return (
-    <Wrapper animate={false} {...getSectionAnimation}>
+    <Wrapper animate={false} {...getSectionAnimation} className="md:mt-20 mt-0">
       <motion.h2 className="heading-secondary text-center !mb-12">
         {title}
       </motion.h2>

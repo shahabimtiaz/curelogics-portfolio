@@ -1,4 +1,5 @@
-import Image from 'next/image';
+import ExportedImage from 'next-image-export-optimizer';
+// import Image from 'next/image';
 
 type Props = { src: string; alt: string };
 
@@ -6,7 +7,7 @@ const AuthorImage = ({ src, alt }: Props) => {
   return (
     <div className="relative w-64 h-64 group sm:w-auto sm:h-auto">
       {/* Main Image */}
-      <Image
+      <ExportedImage
         src={src}
         alt={alt}
         width={300}

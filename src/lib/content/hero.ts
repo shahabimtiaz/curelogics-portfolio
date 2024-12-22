@@ -3,7 +3,7 @@ import { resumeFileName } from '@/lib/utils/config';
 
 export const heroSection: HeroSectionType = {
   subtitle: 'Hi, my name is',
-  title: 'Umer Khalid.',
+  title: 'Umer Warraich.',
   tagline: 'I build scalable web solutions and engaging interfaces.',
   description:
     "I'm a skilled Full-Stack web developer specializing in the MERN stack (MongoDB, Express.js, React.js, and Node.js) and experienced in modern frameworks like Next.js and Nest.js. With expertise in TypeScript, TailwindCSS, and Prisma, I create performant and visually appealing web applications. My passion lies in delivering intuitive user experiences and scalable backend systems.",

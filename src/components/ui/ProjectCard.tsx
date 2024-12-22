@@ -4,13 +4,14 @@ import { blurImageURL } from '@/lib/utils/config';
 
 import { Icon } from '@iconify/react';
 import { motion, MotionProps } from 'framer-motion';
-import Image from 'next/image';
+import ExportedImage from 'next-image-export-optimizer';
+// import Image from 'next/image';
 import { useEffect, useState } from 'react';
 
 const ProjectCard = ({
   name,
   url,
-  repo,
+  // repo,
   year,
   img,
   tags,
@@ -34,7 +35,7 @@ const ProjectCard = ({
         className="block w-full overflow-hidden transition-all duration-200 rounded-md shadow-xl group bg-bg-secondary dark:shadow-2xl"
       >
         <div className="overflow-hidden h-[200px]">
-          <Image
+          <ExportedImage
             src={img}
             alt={name}
             width={300}
@@ -48,13 +49,13 @@ const ProjectCard = ({
           <div className="flex items-center justify-between">
             <p className="font-mono text-xs capitalize">{tags.join(' | ')}</p>
             <div className="flex items-center space-x-1.5">
-              <a
+              {/* <a
                 href={repo}
                 className="block duration-200 hover:text-accent"
                 target="_blank"
               >
                 <Icon icon="tabler:brand-github" width={20} height={20} />
-              </a>
+              </a> */}
               <a
                 href={url}
                 className="block duration-200 hover:text-accent"

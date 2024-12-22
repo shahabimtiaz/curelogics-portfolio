@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Briefcase, Code, Server, CloudLightning } from 'lucide-react';
 import { Wrapper } from '@/components';
@@ -19,61 +19,180 @@ interface Experience {
 const ExperienceTimeline: React.FC = () => {
   const [selectedExperience, setSelectedExperience] =
     useState<Experience | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const { isDarkMode } = useTheme();
+
+  // Lock body scroll when modal is open
+  useEffect(() => {
+    if (isModalOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [isModalOpen]);
+
+  const handleExperienceClick = (exp: Experience) => {
+    setSelectedExperience(exp);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setTimeout(() => setSelectedExperience(null), 300); // Wait for animation to complete
+  };
   const experiences: Experience[] = [
     {
       id: 1,
-      company: 'Tech Innovations Labs',
-      title: 'Lead Full Stack Developer',
-      duration: 'Jan 2022 - Present',
+      company: 'CureLogics',
+      title: 'Senior Software Developer',
+      duration: 'Jan 2024 - Present',
       description: [
-        'Architected scalable microservices using Next.js and TypeScript',
-        'Implemented advanced state management with React Context and Redux',
-        'Developed high-performance GraphQL APIs with Apollo Server',
-        'Led cross-functional teams in agile development environments',
+        'Led a team of software developers to design, develop, and maintain high-performance applications.',
+        'Architected and implemented scalable backend systems using MERN technologies.',
+        'Developed and maintained APIs to support various front-end applications.',
+        'Conducted thorough code reviews, ensuring adherence to best practices and coding standards.',
+        'Collaborated with cross-functional teams, including product managers and designers, to gather requirements and deliver high-quality software solutions.',
+        'Implemented automated testing and continuous integration processes to improve software quality and deployment speed.',
+        'Mentored junior developers, providing guidance and support to enhance their technical skills and career growth.',
+        'Optimized application performance, resulting in significant improvements in speed and reliability.',
+        'Managed project timelines and delivered software solutions on schedule, meeting business objectives and customer needs.',
+        'Stayed current with emerging technologies and industry trends to improve development processes and deliver cutting-edge solutions continually.',
       ],
       skills: [
-        'Next.js',
-        'React',
-        'TypeScript',
+        'Node.js',
+        'MongoDB',
+        'Express.js',
+        'REST API',
+        'PostgreSQL',
+        'MySQL',
+        'AWS S3',
         'GraphQL',
+        'AWS EC2',
+        'Azure',
         'Docker',
+        'React.js',
+        'TypeScript',
+        'Nest.js',
+        'TypeORM',
+        'Sequelize',
+        'Mongoose',
+        'WebSockets',
+        'Git',
         'Kubernetes',
+        'Ubuntu Linux',
       ],
       icon: CloudLightning,
     },
     {
       id: 2,
-      company: 'Digital Solutions Enterprise',
-      title: 'Senior Frontend Engineer',
-      duration: 'Jun 2020 - Dec 2021',
+      company: 'MercurySols',
+      title: 'Senior Software Developer',
+      duration: 'Feb 2021 - Dec 2023',
       description: [
-        'Transformed UI/UX designs into responsive, interactive web applications',
-        'Optimized frontend performance using advanced React optimization techniques',
-        'Implemented comprehensive testing strategies with Jest and React Testing Library',
-        'Mentored junior developers in modern web development practices',
+        'Led a full website redesign based on customer segmentation and competitive research, resulting in a 200% increase in website leads.',
+        'Directed the end-to-end software development life cycle, from conceptualization and functional specification to user experience design, coding, testing, and release, while managing ongoing product maintenance and support.',
+        'Presented the app to project teams, top management, and clients.',
+        'Designed a prototype to identify key influencers on Twitter using clustering techniques on over 100,000 data points in machine learning.',
+        'Executed major system upgrades for existing clients and provided 24x7 consulting support for over 15 clients.',
+        'Managed an 8-person team to ensure efficient project execution.',
       ],
-      skills: ['React', 'Redux', 'Tailwind CSS', 'Framer Motion', 'Cypress'],
+      skills: [
+        'Node.js',
+        'MongoDB',
+        'Express.js',
+        'REST API',
+        'PostgreSQL',
+        'MySQL',
+        'AWS S3',
+        'GraphQL',
+        'AWS EC2',
+        'Azure',
+        'Docker',
+        'React.js',
+        'Typescript',
+        'Nest.js',
+        'TypeORM',
+        'Sequelize',
+        'Mongoose',
+        'Kafka',
+        'Sockets',
+        'Git',
+        'Kubernetes',
+      ],
       icon: Code,
     },
     {
       id: 3,
-      company: 'StartUp Accelerator',
-      title: 'Backend Development Specialist',
-      duration: 'Jan 2019 - May 2020',
+      company: 'Kairos Solutions',
+      title: 'MERN Stack Developer',
+      duration: 'Nov 2016 - Feb 2021',
       description: [
-        'Developed robust backend infrastructure using Node.js and Express',
-        'Designed and implemented efficient MongoDB database schemas',
-        'Created scalable microservices architecture',
-        'Integrated third-party APIs and implemented authentication mechanisms',
+        'Engaged in comprehensive business requirement deliberations, scrutinized client requisites, and proposed adept solutions for intricate development challenges with discernment.',
+        'Led the front-end development using React, JavaScript, and TypeScript, implementing modern features.',
+        'Collaborated with cross-functional teams to create responsive web applications, addressed bugs with the SQA team, and ensured cross-platform compatibility.',
+        'Ensured scalable, performant, and accessible applications, resulting in a 25% improved user experience.',
+        'Implemented unit and integration testing, resulting in 100% improved code quality and bug reduction.',
       ],
-      skills: ['Node.js', 'Express', 'MongoDB', 'REST API', 'Socket.IO'],
+      skills: [
+        'Node.js',
+        'MongoDB',
+        'Express.js',
+        'REST API',
+        'PostgreSQL',
+        'MySQL',
+        'AWS S3',
+        'GraphQL',
+        'AWS EC2',
+        'Azure',
+        'Docker',
+        'React.js',
+        'Typescript',
+        'Nest.js',
+        'TypeORM',
+        'Sequelize',
+        'Mongoose',
+        'Kafka',
+        'Sockets',
+        'Git',
+        'Kubernetes',
+      ],
       icon: Server,
     },
   ];
-
+  const modalVariants = {
+    hidden: {
+      opacity: 0,
+      scale: 0.95,
+      y: 20,
+    },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      y: 0,
+      transition: {
+        type: 'spring',
+        stiffness: 300,
+        damping: 30,
+      },
+    },
+    exit: {
+      opacity: 0,
+      scale: 0.95,
+      y: 20,
+      transition: {
+        duration: 0.2,
+      },
+    },
+  };
   return (
-    <Wrapper id="experience" {...getSectionAnimation}>
+    <Wrapper
+      id="experience"
+      {...getSectionAnimation}
+      className="overflow-hidden"
+    >
       <div className="min-h-screen py-12 px-4 sm:px-6 lg:px-8 relative">
         <motion.h1
           initial={{ opacity: 0, y: -50 }}
@@ -107,7 +226,7 @@ const ExperienceTimeline: React.FC = () => {
               {/* Experience Card - Responsive width and positioning */}
               <motion.div
                 whileHover={{ scale: 1.03 }}
-                onClick={() => setSelectedExperience(exp)}
+                onClick={() => handleExperienceClick(exp)}
                 className={`w-full sm:w-[calc(50%-60px)] p-4 sm:p-6 rounded-lg shadow-md cursor-pointer 
                   border border-gray-200 transition-all duration-300 
                   sm:${index % 2 === 0 ? 'mr-auto' : 'ml-auto'}`}
@@ -152,56 +271,127 @@ const ExperienceTimeline: React.FC = () => {
         </div>
 
         <AnimatePresence>
-          {selectedExperience && (
+          {isModalOpen && selectedExperience && (
             <motion.div
-              initial={{ opacity: 0, y: 50 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: 50 }}
-              className="fixed inset-0 z-50 flex items-center justify-center p-4 overflow-y-auto"
-              onClick={() => setSelectedExperience(null)}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 z-50 overflow-y-auto bg-black bg-opacity-50 backdrop-blur-sm"
+              onClick={closeModal}
             >
-              <motion.div
-                initial={{ scale: 0.9 }}
-                animate={{ scale: 1 }}
-                className="bg-white rounded-2xl max-w-2xl w-full p-4 sm:p-8 relative shadow-lg"
-                onClick={(e) => e.stopPropagation()}
-              >
-                <button
-                  onClick={() => setSelectedExperience(null)}
-                  className="absolute top-2 sm:top-4 right-2 sm:right-4 text-gray-500 hover:text-gray-800"
+              <div className="min-h-screen px-4 text-center">
+                {/* This element is to trick the browser into centering the modal contents. */}
+                <span
+                  className="inline-block h-screen align-middle"
+                  aria-hidden="true"
                 >
-                  ✕
-                </button>
-                <h2 className="text-2xl sm:text-3xl font-bold mb-2 text-gray-800">
-                  {selectedExperience.title}
-                </h2>
-                <h3 className="text-lg sm:text-xl text-gray-600 mb-4">
-                  {selectedExperience.company}
-                </h3>
-                <p className="text-sm sm:text-base text-gray-500 mb-6">
-                  {selectedExperience.duration}
-                </p>
+                  &#8203;
+                </span>
 
-                <ul className="space-y-2 sm:space-y-3 mb-6 text-gray-700 text-sm sm:text-base">
-                  {selectedExperience.description.map((desc, i) => (
-                    <li key={i} className="flex items-start">
-                      <span className="mr-2 sm:mr-3 text-gray-500">▸</span>
-                      {desc}
-                    </li>
-                  ))}
-                </ul>
-
-                <div className="flex flex-wrap gap-1 sm:gap-2">
-                  {selectedExperience.skills.map((skill, i) => (
-                    <span
-                      key={i}
-                      className="bg-gray-100 text-gray-800 px-2 sm:px-3 py-0.5 sm:py-1 rounded-full text-xs sm:text-sm"
+                <motion.div
+                  variants={modalVariants}
+                  initial="hidden"
+                  animate="visible"
+                  exit="exit"
+                  className={`inline-block w-full max-w-2xl p-6 my-8 text-left align-middle transition-all transform 
+                    ${
+                      isDarkMode
+                        ? 'bg-gray-800 text-white'
+                        : 'bg-white text-gray-900'
+                    }
+                    rounded-2xl shadow-xl relative max-h-[90vh] overflow-y-auto`}
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  <button
+                    onClick={closeModal}
+                    className={`absolute top-4 right-4 p-2 rounded-full 
+                      ${isDarkMode ? 'hover:bg-gray-700' : 'hover:bg-gray-100'}
+                      transition-colors duration-200`}
+                  >
+                    <span className="sr-only">Close</span>
+                    <svg
+                      className="w-6 h-6"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
                     >
-                      {skill}
-                    </span>
-                  ))}
-                </div>
-              </motion.div>
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M6 18L18 6M6 6l12 12"
+                      />
+                    </svg>
+                  </button>
+
+                  <div className="mt-2">
+                    <div className="flex items-center mb-6">
+                      <selectedExperience.icon className="w-8 h-8 mr-4" />
+                      <div>
+                        <h2 className="text-2xl font-bold">
+                          {selectedExperience.title}
+                        </h2>
+                        <p
+                          className={`text-lg ${
+                            isDarkMode ? 'text-gray-300' : 'text-gray-600'
+                          }`}
+                        >
+                          {selectedExperience.company}
+                        </p>
+                        <p
+                          className={`text-sm ${
+                            isDarkMode ? 'text-gray-400' : 'text-gray-500'
+                          }`}
+                        >
+                          {selectedExperience.duration}
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="space-y-4">
+                      <ul className="space-y-3">
+                        {selectedExperience.description.map((desc, i) => (
+                          <li key={i} className="flex items-start">
+                            <span
+                              className={`mr-3 ${
+                                isDarkMode ? 'text-gray-400' : 'text-gray-500'
+                              }`}
+                            >
+                              ▸
+                            </span>
+                            <span className="text-sm sm:text-base">{desc}</span>
+                          </li>
+                        ))}
+                      </ul>
+
+                      <div className="pt-6">
+                        <h3
+                          className={`text-lg font-semibold mb-3 ${
+                            isDarkMode ? 'text-gray-200' : 'text-gray-700'
+                          }`}
+                        >
+                          Skills & Technologies
+                        </h3>
+                        <div className="flex flex-wrap gap-2">
+                          {selectedExperience.skills.map((skill, i) => (
+                            <span
+                              key={i}
+                              className={`px-3 py-1 rounded-full text-sm
+                                ${
+                                  isDarkMode
+                                    ? 'bg-gray-700 text-gray-200'
+                                    : 'bg-gray-100 text-gray-800'
+                                }`}
+                            >
+                              {skill}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
+              </div>
             </motion.div>
           )}
         </AnimatePresence>
